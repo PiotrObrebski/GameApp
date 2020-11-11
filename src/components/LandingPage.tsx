@@ -1,9 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { setAllGames, setUser } from '../redux/actions';
 
-const LandingPage = (props) => {  
+const LandingPage = (
+  props: {
+    setUser: (content: User) => void;
+    setAllGames: (content: Game[]) => void;
+    user: User;
+    allGames: {
+      gamesArray: Game[]
+    }
+  }
+): ReactElement => {  
   useEffect(()=>{
     const newUser = fetchUserData();
     const newGames = fetchAllGamesData();
@@ -48,7 +57,14 @@ const fetchAllGamesData = () => {
   ]
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (
+  state: {
+    user: User;
+    allGames: {
+      gamesArray: Game[];
+    }
+  }
+) => {
   const { user, allGames } = state;
   return { user, allGames };
 }
