@@ -6,6 +6,6 @@ Doc created to log time spent on developing the application.<br/>
 3h - Basic Logic of components and strong typing of the components
 <br/>
 <hr>
-Self Development time to understand the structures I am about to work with.
+Self Development time to understand the structures I am about to work with.<br/>
 3h - Understanding Redux + Typescript implementation<br/>
-3h - Understanding the structure to pass proper typing and debugging
+3h - Understanding the structure to pass proper typing and debugging<br/>
