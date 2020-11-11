@@ -8,18 +8,14 @@ const initialState = {
 
 export default function(state = initialState, action: { type: string, payload: User }): User {
   switch (action.type) {
-    case SET_USER: {
-      const { id, name, email } = action.payload;
+    case SET_USER: 
       return {
         ...state,
-        id,
-        name,
-        email
-      
+        id: action.payload.id,
+        name: action.payload.name,
+        email: action.payload.email
       }
-    }
-    default: {
+    default: 
       return state;
-    }
   }
 }
