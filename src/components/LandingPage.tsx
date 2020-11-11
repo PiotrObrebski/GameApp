@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect } from 'react';
 import { connect } from 'react-redux';
 
+import { getUserFromServer } from '../api-helper';
 import { setAllGames, setUser } from '../redux/actions';
 
 const LandingPage = (
@@ -13,17 +14,19 @@ const LandingPage = (
     }
   }
 ): ReactElement => {  
-  useEffect(()=>{
-    const newUser = fetchUserData();
+  useEffect(() => {
+    getUserFromServer().then( response => {
+      props.setUser(response)}
+    )
+    
     const newGames = fetchAllGamesData();
-    props.setUser(newUser);
     props.setAllGames(newGames);
   }, []);
 
   return (
   <div className="todo-app">
     <h1>Hello {props.user.name}</h1>
-    <div>List of all games:</div>
+    <div>What would you like to play today?</div>
     {props.allGames.gamesArray.map(
       (game, id)=>{
         return(
@@ -36,14 +39,6 @@ const LandingPage = (
   </div>
   )
 };
-
-const fetchUserData = () => {
-  return {
-    id: "f7bbbdd9-5a55-4a32-b53e-b5b74b4d24b4",
-    name: "John Doe",
-    email: "john@selfdecode.com"
-  }
-}
 
 const fetchAllGamesData = () => {
   return  [
