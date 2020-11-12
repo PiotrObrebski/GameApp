@@ -1,7 +1,8 @@
 import React, { ReactElement, useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { getUserFromServer } from '../api-helper';
+import { GAMES_END_POINT, USER_END_POINT } from '../api-end-points';
+import { getDataFromServer } from '../api-helper';
 import { setAllGames, setUser } from '../redux/actions';
 
 const LandingPage = (
@@ -15,12 +16,15 @@ const LandingPage = (
   }
 ): ReactElement => {  
   useEffect(() => {
-    getUserFromServer().then( response => {
-      props.setUser(response)}
-    )
+    getDataFromServer(USER_END_POINT)
+    .then( response => {
+      props.setUser(response)
+    })
     
-    const newGames = fetchAllGamesData();
-    props.setAllGames(newGames);
+    getDataFromServer(GAMES_END_POINT)
+    .then( response => {
+      props.setAllGames(response)
+    })
   }, []);
 
   return (
@@ -39,18 +43,6 @@ const LandingPage = (
   </div>
   )
 };
-
-const fetchAllGamesData = () => {
-  return  [
-    {
-      id: "c77f35e3-d41c-446c-af63-80f430a962d0",
-      name: "Double Trouble",
-      intro_text: "See what color the top word is. Select that color from the two options below. DON’T pay attention to what the top word says or the color of the two options below. It’s important to match the color of the top word with the meaning of the word below.",
-      farewell_text: "We will reach you as soon as we carefully review your interview.",
-      time: 120
-    },
-  ]
-}
 
 const mapStateToProps = (
   state: {
