@@ -28,7 +28,8 @@ const LandingPage = (
     .then( response => {
       props.setAllGames(response)
     })
-
+    // TODO:
+    // Game End -> request
     // putScoreOnServer(SCORE_END_POINT, {
     //   "user_id": "f7bbbdd9-5a55-4a32-b53e-b5b74b4d24b4",
     //   "score": '48',
