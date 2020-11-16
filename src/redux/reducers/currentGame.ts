@@ -12,8 +12,8 @@ export default function(
   state = initialState,
   action: {
     type: string,
-    payload: Game
-  }): Game {
+    payload: IGame
+  }): IGame {
   switch (action.type) {
     case SET_CURRENT_GAME: 
       return {
@@ -23,7 +23,6 @@ export default function(
         farewell_text: action.payload.farewell_text,
         time: action.payload.time
       };
-    
     default:
       return state
   }

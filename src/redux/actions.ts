@@ -1,4 +1,4 @@
-import { SET_All_GAMES, SET_CURRENT_GAME, SET_USER } from './actionTypes';
+import { SET_All_GAMES, SET_CURRENT_GAME, SET_SCORE, SET_USER, TOGGLE_VOLUME } from './actionTypes';
 
 export const setUser = (content: User) : {
   type: string,
@@ -12,17 +12,17 @@ export const setUser = (content: User) : {
   }
 });
 
-export const setAllGames = (content: Game[]) : {
+export const setAllGames = (content: IGame[]) : {
   type: string,
-  payload: Game[]
+  payload: IGame[]
 } => ({
   type: SET_All_GAMES,
   payload: content
 });
 
-export const setCurrentGame = (content: Game) : {
+export const setCurrentGame = (content: IGame) : {
   type: string,
-  payload: Game
+  payload: IGame
 } => ({
   type: SET_CURRENT_GAME,
   payload: {
@@ -32,4 +32,19 @@ export const setCurrentGame = (content: Game) : {
     farewell_text: content.farewell_text,
     time: content.time
   }
+});
+
+
+export const toggleSound = () : {
+  type: string
+} => ({
+  type: TOGGLE_VOLUME
+});
+
+export const changeScore = (content: ILaunchedGame) : {
+  type: string;
+  payload: ILaunchedGame
+} => ({
+  type: SET_SCORE,
+  payload: content
 });
