@@ -1,13 +1,25 @@
 import './Game-App.css';
 
 import React, { FC, ReactElement } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import LandingPage from './components/LandingPage';
+import Game from './components/Game/Game';
+import GamePage from './components/GamePage/GamePage';
+import LandingPage from './components/LandingPage/LandingPage';
 
 const GameApp: FC = (): ReactElement => {
   return (
+    
     <div className="game-app">
-      <LandingPage/>
+      <div className="wrapper">
+      <Router>
+        <Switch>
+          <Route exact path="/" component={LandingPage}/>
+          <Route exact path="/:name" component={GamePage}/>
+          <Route path="/:name/play" component={Game}/>
+        </Switch>
+      </Router>
+      </div>
     </div>
   );
 }

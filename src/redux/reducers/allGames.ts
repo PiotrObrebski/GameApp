@@ -16,10 +16,10 @@ export default function(
     state = initialState,
     action: {
       type: string;
-      payload: Game[];
+      payload: IGame[];
     }
   ): {
-    gamesArray: Array<Game>
+    gamesArray: Array<IGame>
   } {
   switch (action.type) {
     case SET_All_GAMES: 
