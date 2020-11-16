@@ -6,11 +6,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #231826;
   color: #ffffff;
 }
 
 code {
   font-family: 'Public Sans' source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+#root{
+  background-color: #ffffff;
 }
