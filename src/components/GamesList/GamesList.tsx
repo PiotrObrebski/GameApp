@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 export const GamesList = (props:{
   allGames: {
-    gamesArray: Game[]
+    gamesArray: IGame[]
   }
 }): ReactElement => {
   return (
