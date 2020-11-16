@@ -11,10 +11,10 @@ import { GamesList } from '../GamesList/GamesList';
 const LandingPage = (
   props: {
     setUser: (content: User) => void;
-    setAllGames: (content: Game[]) => void;
+    setAllGames: (content: IGame[]) => void;
     user: User;
     allGames: {
-      gamesArray: Game[]
+      gamesArray: IGame[]
     }
   }
 ): ReactElement => {  
@@ -29,7 +29,7 @@ const LandingPage = (
       props.setAllGames(response)
     })
     // TODO:
-    // Game End -> request
+    // IGame End -> request
     // putScoreOnServer(SCORE_END_POINT, {
     //   "user_id": "f7bbbdd9-5a55-4a32-b53e-b5b74b4d24b4",
     //   "score": '48',
@@ -51,7 +51,7 @@ const mapStateToProps = (
   state: {
     user: User;
     allGames: {
-      gamesArray: Game[];
+      gamesArray: IGame[];
     }
   }
 ) => {
