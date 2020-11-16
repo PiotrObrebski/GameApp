@@ -3,6 +3,7 @@ import './GamePage.css';
 import React, { ReactElement, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import { GAMES_END_POINT } from '../../api-end-points';
 import { getDataFromServer } from '../../api-helper';
@@ -10,21 +11,21 @@ import { setCurrentGame } from '../../redux/actions';
 import descImage from './desc-img/double-trouble-desc.png';
 
 interface IGamePageProps extends RouteComponentProps<{ name: string}> {
-  allGames: { gamesArray: Game[] };
-  currentGame: Game;
-  setCurrentGame: (content: Game) => void;
+  allGames: { gamesArray: IGame[] };
+  currentGame: IGame;
+  setCurrentGame: (content: IGame) => void;
 }
 
 const GamePage = (props: IGamePageProps): ReactElement => {
   useEffect(() => {
 
-    const Game:Game[] = props.allGames.gamesArray.filter(
+    const chosenGame:IGame[] = props.allGames.gamesArray.filter(
       obj => {
         return obj.name === props.match.params.name
       }
     );
 
-    getDataFromServer(GAMES_END_POINT+Game[0].id)
+    getDataFromServer(GAMES_END_POINT+chosenGame[0].id)
     .then( response => {
       props.setCurrentGame(response)
     })
@@ -36,7 +37,7 @@ const GamePage = (props: IGamePageProps): ReactElement => {
       <p className="intro-text">{props.currentGame.intro_text}</p>
       <img className="desc-img"
       src={props.currentGame.name === "Double Trouble" ? descImage : "" } alt="game-description"/>
-      <button className="btn-confirm">I understand</button>
+        <Link className="btn-confirm"to={`/${props.currentGame.name}/play`}>I understand</Link>
     </div>
   )
 }
@@ -44,8 +45,8 @@ const GamePage = (props: IGamePageProps): ReactElement => {
 const mapStateToProps = (
   state: {
     user: User;
-    allGames: { gamesArray: Game[] };
-    currentGame: Game;
+    allGames: { gamesArray: IGame[] };
+    currentGame: IGame;
   }
 ) => {
   const { user, allGames, currentGame } = state;
