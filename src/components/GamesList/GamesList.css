@@ -8,10 +8,15 @@
 }
 
 .game-list-item-link{
-  padding: 2px 14px;
-  border: 1px solid black;
+  padding: 5px 30px;
+  border: 1px solid #8ac926;
   border-radius: 100px;
   text-decoration: none;
-  color: #000000;
+  color: #8ac926;
   font-size: 3rem;
+}
+
+.game-list-item-link:hover{
+  color: #231826;
+  background-color: #8ac926;
 }
