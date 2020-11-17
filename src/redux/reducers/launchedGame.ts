@@ -1,8 +1,9 @@
-import { SET_SCORE, TOGGLE_VOLUME } from '../actionTypes';
+import { SET_SCORE, START_GAME, TOGGLE_VOLUME } from '../actionTypes';
 
 const initialState = {
   volume: true,
   score: 0,
+  gameActive: false
 }
 
 export default function(
@@ -22,6 +23,12 @@ export default function(
         ...state,
         score: action.payload.score
       };
+      
+    case START_GAME: 
+    return {
+      ...state,
+      gameActive: true
+    };
     default:
       return state
   }
