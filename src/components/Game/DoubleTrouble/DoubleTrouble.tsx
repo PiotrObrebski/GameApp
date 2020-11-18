@@ -1,42 +1,42 @@
 import './DoubleTrouble.css';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ReactElement } from 'react';
 import { connect } from 'react-redux';
-import { Link, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 
-import { startGame } from '../../../redux/actions';
+import { startGame, stopGame } from '../../../redux/actions';
 import ScoreControl from '../ScoreControl/ScoreControl';
 import SoundControl from '../SoundControl/SoundControl';
 import TimeControl from '../TimeControl/TimeControl';
+import PrepareForGame from './PrepareForGame';
 
 interface IDoubleTroubleProps extends RouteComponentProps<{ name: string}> {
   currentGame: IGame;
   launchedGame: ILaunchedGame;
   startGame: () => void;
+  stopGame: () => void;
 }
 const DoubleTrouble = (props: IDoubleTroubleProps): ReactElement => {
+  useEffect(()=>{
+    if (props.launchedGame.gameActive){
+      const timer = setTimeout(() => {
+        
+        props.stopGame()
+      }, props.currentGame.time*100);
+      return () => clearTimeout(timer);
+    }
+
+  },[props.launchedGame.gameActive]);
   
+  // console.log(props.launchedGame.gameActive)
   return (
     <div className="game-double-trouble">
       
       <div className="game-double-trouble-body">
         {!props.launchedGame.gameActive ? 
-          <div className="prepare-for-game">
-            <div className="play-wrapper">
-              <div onClick={props.startGame} className="play-button">
-                <i className="fas fa-play"></i>
-              </div>
-            </div>
-            <div className="start-text">Start the game</div>
-            <Link
-              className="back-to-desc"
-              to={`/${props.currentGame.name}`}
-            >
-              Instructions
-            </Link>
-          </div> : 
-          <div className="launched-game">
+          <PrepareForGame startGame={props.startGame} name={props.currentGame.name}/> : 
+          <div onClick={props.stopGame} className="launched-game">
             Go!
           </div>
         }
@@ -45,7 +45,7 @@ const DoubleTrouble = (props: IDoubleTroubleProps): ReactElement => {
       <div className="game-double-trouble-aside">
         
         <div className="aside-timer dark-gradient">
-          <TimeControl/>
+          <TimeControl active={props.launchedGame.gameActive}/>
         </div>
         
         <div className="aside-score dark-gradient">
@@ -72,6 +72,7 @@ const mapStateToProps = (
 export default connect(
   mapStateToProps, 
   {
-    startGame
+    startGame,
+    stopGame
   }
 )(DoubleTrouble);

@@ -4,3 +4,4 @@ export const SET_CURRENT_GAME = 'SET_CURRENT_GAME';
 export const TOGGLE_VOLUME = 'TOGGLE_VOLUME';
 export const SET_SCORE = 'SET_SCORE';
 export const START_GAME ='START_GAME';
+export const STOP_GAME ='STOP_GAME';
