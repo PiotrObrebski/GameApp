@@ -18,36 +18,33 @@ interface IDoubleTroubleProps extends RouteComponentProps<{ name: string}> {
   stopGame: () => void;
 }
 const DoubleTrouble = (props: IDoubleTroubleProps): ReactElement => {
+
   useEffect(()=>{
     if (props.launchedGame.gameActive){
       const timer = setTimeout(() => {
-        
         props.stopGame()
       }, props.currentGame.time*100);
+
       return () => clearTimeout(timer);
     }
 
   },[props.launchedGame.gameActive]);
   
-  // console.log(props.launchedGame.gameActive)
   return (
     <div className="game-double-trouble">
-      
       <div className="game-double-trouble-body">
         {!props.launchedGame.gameActive ? 
-          <PrepareForGame startGame={props.startGame} name={props.currentGame.name}/> : 
+          <PrepareForGame active={props.launchedGame.gameActive} startGame={props.startGame} name={props.currentGame.name}/> : 
           <div onClick={props.stopGame} className="launched-game">
             Go!
           </div>
         }
       </div>
       
-      <div className="game-double-trouble-aside">
-        
+      <div className="game-double-trouble-aside">        
         <div className="aside-timer dark-gradient">
           <TimeControl active={props.launchedGame.gameActive}/>
         </div>
-        
         <div className="aside-score dark-gradient">
           <ScoreControl/>
         </div>

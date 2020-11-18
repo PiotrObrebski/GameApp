@@ -1,6 +1,6 @@
 import './TimeControl.css';
 
-import React, { CSSProperties, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ReactElement } from 'react';
 import { connect } from 'react-redux';
 
@@ -10,23 +10,34 @@ const TimeControl = (
     active: boolean
   }
 ): ReactElement => {
-  // useEffect(()=>{
-  //   if (props.active){
-  //     const timer = setTimeout(() => {
-  //       // sliderAnimation()
-        
-        
-  //     }, props.currentGame.time);
-  //     return () => clearTimeout(timer);
-  //   }
+  const [seconds, setSeconds] = useState(0);
+  let gameTime = props.currentGame.time - seconds;
 
-  // },[props.active]);
+  useEffect(() => {
 
-  // const sliderAnimation = () => {
-  //   const sliderElement = document.querySelector('.time-control-slider');
-  //   const transitionTime = props.currentGame.time.toString() + 's';
-  //   window.getComputedStyle(sliderElement, ':before').setProperty('transition', transitionTime)
-  // }
+    if(props.active){
+      const intervalCountDown = setInterval(() => {
+        setSeconds(seconds => seconds + 1)
+      }, 1000);
+
+      return () => {
+        gameTime = props.currentGame.time;
+        setSeconds(0);
+        clearTimeout(intervalCountDown)
+      };
+    }
+  },[props.active]);
+
+  const sliderAnimation = () => {
+    const sliderTransition = props.active ? 
+      {
+        transition: `all ${props.currentGame.time.toString()}s linear`
+      } : {
+        transition: '0s'
+      }
+
+    return sliderTransition
+  }
 
   const generateSliderClassName = () => {
     const sliderClassName = props.active ? 'time-control-slider time-control-slider-hidden' : 'time-control-slider';
@@ -38,14 +49,14 @@ const TimeControl = (
   <div className="time-control">
     <div className="time-control-top">
       <div className={generateSliderClassName()}>
-        {/* <div style={sliderheight} className="slider-bar"></div> */}
+        <div style={sliderAnimation()} className="slider-bar"></div>
       </div>
     </div>
     <div className="time-control-bottom">
       <div className="time-control-bottom-content">
         <div className="time-control-text">time</div>
         <div className="time-control-number">
-          {props.currentGame.time}
+          {gameTime}
         </div>
       </div>
     </div>
