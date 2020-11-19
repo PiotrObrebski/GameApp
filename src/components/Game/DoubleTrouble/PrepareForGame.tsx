@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+import LaunchAnimation from './LaunchAnimation';
 
 
 interface IPrepareForGame {
@@ -15,7 +16,7 @@ const PrepareForGame = (props: IPrepareForGame): ReactElement => {
     if(launch){
       const timerToLaunch = setTimeout(() => {
         props.startGame()
-      }, 3000);
+      }, 4000);
 
       return () => {
         clearTimeout(timerToLaunch)
@@ -40,9 +41,14 @@ const PrepareForGame = (props: IPrepareForGame): ReactElement => {
     return(
       <div className="prepare-for-game">
         <div className="play-wrapper">
-          <div onClick={setLaunchToTrue} className="play-button">
-            <i className="fas fa-play"></i>
-          </div>
+          {
+            !launch ? 
+            <div onClick={setLaunchToTrue} className="play-button">
+              <i className="fas fa-play"></i>
+            </div>
+            :
+            <LaunchAnimation/>
+          }
         </div>
         <div className="start-text">Start the game</div>
         <Link
