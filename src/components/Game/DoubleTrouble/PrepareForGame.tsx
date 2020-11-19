@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
+
 import LaunchAnimation from './LaunchAnimation';
 
 
@@ -11,12 +12,13 @@ interface IPrepareForGame {
 }
 const PrepareForGame = (props: IPrepareForGame): ReactElement => {
   const [launch, setLaunch] = useState(false);
+  const launchTime = 6000;
 
   useEffect(() => {
     if(launch){
       const timerToLaunch = setTimeout(() => {
         props.startGame()
-      }, 4000);
+      }, launchTime);
 
       return () => {
         clearTimeout(timerToLaunch)
@@ -39,25 +41,25 @@ const PrepareForGame = (props: IPrepareForGame): ReactElement => {
       )
   } else {
     return(
-      <div className="prepare-for-game">
-        <div className="play-wrapper">
-          {
-            !launch ? 
-            <div onClick={setLaunchToTrue} className="play-button">
-              <i className="fas fa-play"></i>
+        !launch ? 
+          <div className="prepare-for-game">
+            <div className="play-wrapper">
+                <div onClick={setLaunchToTrue} className="play-button">
+                  <i className="fas fa-play"></i>
+                </div>
             </div>
-            :
-            <LaunchAnimation/>
-          }
+            <div className="start-text">Start the game</div>
+            <Link
+              className="back-to-desc"
+              to={`/${props.name}`}
+            >
+              Instructions
+            </Link>
+          </div>
+        :
+        <div className="prepare-for-game">
+          <LaunchAnimation duration={launchTime}/>
         </div>
-        <div className="start-text">Start the game</div>
-        <Link
-          className="back-to-desc"
-          to={`/${props.name}`}
-        >
-          Instructions
-        </Link>
-      </div>
       )
   }
   
