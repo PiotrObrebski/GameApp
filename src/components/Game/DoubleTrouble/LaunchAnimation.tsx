@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ReactElement } from 'react';
 
-import greenLines from './greenLines.svg';
-import redLines from './redLines.svg';
+import greenLines from './icons/greenLines.svg';
+import redLines from './icons/redLines.svg';
 
 const LaunchAnimation = (props: { duration: number }): ReactElement => {
   const [countDown, setCountDown] = useState(8);
