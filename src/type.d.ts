@@ -14,5 +14,7 @@ interface IGame {
 
 interface ILaunchedGame {
   volume: boolean,
-  score: number
+  score: number,
+  gameActive: boolean
+  finished: boolean
 }

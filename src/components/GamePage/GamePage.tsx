@@ -35,8 +35,12 @@ const GamePage = (props: IGamePageProps): ReactElement => {
     <div className="game-page">
       <p className="game-page-header">Instructions</p>
       <p className="intro-text">{props.currentGame.intro_text}</p>
-      <img className="desc-img"
-      src={props.currentGame.name === "Double Trouble" ? descImage : "" } alt="game-description"/>
+      {props.currentGame.name === "Double Trouble" ?
+      <img
+        className="desc-img"
+        src={descImage}
+        alt="game-description"/>
+      : null }
         <Link className="btn-confirm"to={`/${props.currentGame.name}/play`}>I understand</Link>
     </div>
   )
