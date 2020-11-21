@@ -28,23 +28,22 @@ const LandingPage = (
     .then( response => {
       props.setAllGames(response)
     })
-    // TODO:
-    // IGame End -> request
-    // putScoreOnServer(SCORE_END_POINT, {
-    //   "user_id": "f7bbbdd9-5a55-4a32-b53e-b5b74b4d24b4",
-    //   "score": '48',
-    //   "game_id": "c77f35e3-d41c-446c-af63-80f430a962d0"
-    // })
-    // .then( response => console.log(response));
   }, []);
 
-  return (
-  <div className="landing-page">
-    <h1>Hello {props.user.name}</h1>
-    <div>What would you like to play today?</div>
-    <GamesList allGames={props.allGames}/>
-  </div>
-  )
+  if(props.allGames.gamesArray[0]?.id.length > 0 && props.user.id.length > 0 )
+  {
+    return (
+      <div className="landing-page">
+        <h1>Hello {props.user.name}</h1>
+        <div>What would you like to play today?</div>
+        <GamesList allGames={props.allGames}/>
+      </div>
+      )
+  } else {
+    return (
+      <div className="landing-page"></div>
+    )
+  }
 };
 
 const mapStateToProps = (
