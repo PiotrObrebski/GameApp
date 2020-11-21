@@ -1,4 +1,13 @@
-import { SET_All_GAMES, SET_CURRENT_GAME, SET_SCORE, SET_USER, START_GAME, STOP_GAME, TOGGLE_VOLUME } from './actionTypes';
+import {
+  FINISH_GAME,
+  SET_All_GAMES,
+  SET_CURRENT_GAME,
+  SET_SCORE,
+  SET_USER,
+  START_GAME,
+  STOP_GAME,
+  TOGGLE_VOLUME,
+} from './actionTypes';
 
 export const setUser = (content: User) : {
   type: string,
@@ -59,4 +68,10 @@ export const stopGame = () : {
   type: string;
 } => ({
   type: STOP_GAME
+});
+
+export const setFinishedTrue = () : {
+  type: string;
+} => ({
+  type: FINISH_GAME
 });
