@@ -29,7 +29,7 @@ const ActiveGame = (props:{
   const checkIfRight = (event: React.MouseEvent<HTMLElement>) => {
     const buttonContent = (event.target as Element).parentElement?.querySelector('.active-game-button-text')?.textContent?.toLowerCase();
     const headerColor = headerElement?.style.color === 'rgb(0, 129, 255)' ? 'blue' : 'red';
-    console.log(buttonContent, headerColor)
+    
     return buttonContent === headerColor ? true : false ;
   }
 
