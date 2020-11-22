@@ -43,7 +43,6 @@ export const setCurrentGame = (content: IGame) : {
   }
 });
 
-
 export const toggleSound = () : {
   type: string
 } => ({
